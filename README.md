@@ -22,7 +22,6 @@ O objetivo principal é oferecer uma interface simples e funcional via console p
 ## Integrantes do Grupo
 - João Gabriel Dias RM 99092
 - Lucas Carlos Bandeira RM 98640 
-*(Substitua pelos nomes reais dos integrantes do grupo)*
 
 ## Versão do .NET/C# Utilizada
 - **C#**: 12.0
