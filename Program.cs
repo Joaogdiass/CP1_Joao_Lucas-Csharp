@@ -18,13 +18,12 @@ class Program
 
     static void Main(string[] args)
     {
-        // Array de produtos disponíveis
+        // Produtos cadastrados estaticamente
         Produto[] cardapio = new Produto[3];
         cardapio[0] = new Produto { Nome = "X-Burguer", Preco = 25.00 };
         cardapio[1] = new Produto { Nome = "Refrigerante", Preco = 8.00 };
         cardapio[2] = new Produto { Nome = "Sorvete", Preco = 12.00 };
 
-        // Array para armazenar o pedido (máximo de 10 itens)
         ItemPedido[] pedido = new ItemPedido[10];
         int totalItens = 0;
 
@@ -65,6 +64,9 @@ class Program
         }
     }
 
+    /*
+     * Função que exibe o menu principal do sistema
+     */
     static void ExibirMenu()
     {
         Console.WriteLine("\n=== LANCHONETE VIRTUAL ===");
@@ -76,6 +78,9 @@ class Program
         Console.Write("Escolha uma opção: ");
     }
 
+    /*
+     * Lista todos os produtos do cardápio
+     */
     static void ListarProdutos(Produto[] cardapio)
     {
         Console.WriteLine("\nProdutos disponíveis:");
@@ -85,11 +90,15 @@ class Program
         }
     }
 
+    /*
+     * Adiciona um produto ao pedido atual
+     */
     static int AdicionarProduto(Produto[] cardapio, ItemPedido[] pedido, int totalItens)
     {
         ListarProdutos(cardapio);
         Console.Write("Digite o número do produto: ");
         int codigo = int.Parse(Console.ReadLine()) - 1;
+
         Console.Write("Digite a quantidade: ");
         int qtd = int.Parse(Console.ReadLine());
 
@@ -99,9 +108,13 @@ class Program
             totalItens++;
             Console.WriteLine("Produto adicionado com sucesso!");
         }
+
         return totalItens;
     }
 
+    /*
+     * Remove um item do pedido
+     */
     static int RemoverProduto(ItemPedido[] pedido, int totalItens)
     {
         VisualizarPedido(pedido, totalItens);
@@ -116,6 +129,7 @@ class Program
                 {
                     pedido[i] = pedido[i + 1];
                 }
+
                 totalItens--;
                 Console.WriteLine("Produto removido com sucesso!");
             }
@@ -123,6 +137,9 @@ class Program
         return totalItens;
     }
 
+    /*
+     * Mostra o pedido atual com valores
+     */
     static void VisualizarPedido(ItemPedido[] pedido, int totalItens)
     {
         Console.WriteLine("\nSeu pedido atual:");
@@ -138,6 +155,9 @@ class Program
         }
     }
 
+    /*
+     * Finaliza o pedido e exibe o resumo
+     */
     static void FinalizarPedido(ItemPedido[] pedido, int totalItens)
     {
         if (totalItens == 0)
@@ -156,6 +176,7 @@ class Program
         }
 
         double desconto = 0;
+
         if (valorBruto > 100.00)
         {
             desconto = valorBruto * 0.10;
@@ -163,6 +184,12 @@ class Program
         }
 
         double valorFinal = valorBruto - desconto;
+
+        // Brinde adicional
+        if (qtdTotalItens >= 5)
+        {
+            Console.WriteLine("🎁 Parabéns! Você ganhou um brinde por comprar 5 itens ou mais!");
+        }
 
         Console.WriteLine("\n=== RESUMO DO PEDIDO ===");
         Console.WriteLine($"Total de itens: {qtdTotalItens}");
